@@ -23,7 +23,7 @@ const options={
 }
 // Scene
 const scene=new Three.Scene()
-scene.background=new Three.Color(0xffffff)
+scene.background=new Three.Color(0x000000)
 
 // Camera 
 const camera=new Three.PerspectiveCamera(80, options.width/options.height, 0.1, 1000)
@@ -38,15 +38,19 @@ camera.position.y=0
 // Cube
 
 
-const cubeGeometry=new Three.BoxGeometry(2,2,2)
-const cubeMaterial=new Three.MeshStandardMaterial({color: "crimson"})
-const cubeobj = new Three.Mesh(cubeGeometry, cubeMaterial)
-scene.add(cubeobj)
+const cubeGeometry=new Three.BoxGeometry(5,5,5)
+const cubeMaterials=[
+    new Three.MeshStandardMaterial({color: "#FF7B00"}),
+    new Three.MeshStandardMaterial({color: "#FF0000"}),
+    new Three.MeshStandardMaterial({color: "#FFFFFF"}),
+    new Three.MeshStandardMaterial({color: "#FFFB00"}),
+    new Three.MeshStandardMaterial({color: "blue"}),
+    new Three.MeshStandardMaterial({color: "#00FF00"}),
 
-const cubeMaterial2=new Three.MeshStandardMaterial({color: "blue"})
-const cubeobj2 = new Three.Mesh(cubeGeometry, cubeMaterial2)
-scene.add(cubeobj2)
-cubeobj2.position.y=3
+]
+const cubeobj = new Three.Mesh(cubeGeometry, cubeMaterials)
+scene.add(cubeobj)
+cubeobj.position.y=0
 
 
 
@@ -87,12 +91,19 @@ window.addEventListener("mousemove",function(e){
     if(drag){
         dragX=mouseStartX-mouseX
         dragY=mouseStartY-mouseY
-        cubeobj2.rotation.x=(newOrigin.y/100)-(dragY/100)
-        cubeobj2.rotation.y=-(newOrigin.x/100)-(dragX/100)
+        cubeobj.rotation.x=(newOrigin.y/100)-(dragY/100)
+        cubeobj.rotation.y=-(newOrigin.x/100)-(dragX/100)
 
     }
 
 })
+
+window.addEventListener("wheel", function(e){
+    e.preventDefault()
+    camera.position.y-=e.deltaY/100
+    camera.position.x+=e.deltaX/100
+
+},{passive: false})
 
 window.addEventListener("mousedown", function(){
     if(!drag){
