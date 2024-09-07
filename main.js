@@ -36,6 +36,8 @@ camera.position.y=0
 
 // Objects
 // Cube
+
+
 const cubeGeometry=new Three.BoxGeometry(2,2,2)
 const cubeMaterial=new Three.MeshStandardMaterial({color: "crimson"})
 const cubeobj = new Three.Mesh(cubeGeometry, cubeMaterial)
@@ -85,8 +87,8 @@ window.addEventListener("mousemove",function(e){
     if(drag){
         dragX=mouseStartX-mouseX
         dragY=mouseStartY-mouseY
-        cubeobj.rotation.x=(newOrigin.y/100)-(dragY/100)
-        cubeobj.rotation.y=-(newOrigin.x/100)-(dragX/100)
+        cubeobj2.rotation.x=(newOrigin.y/100)-(dragY/100)
+        cubeobj2.rotation.y=-(newOrigin.x/100)-(dragX/100)
 
     }
 
